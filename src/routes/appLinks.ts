@@ -1,11 +1,13 @@
 export enum ModuleNames {
   APP = "App",
   LOGIN = "Login",
+  TEST = "Test",
 }
 
 export const AppLinks = {
   [ModuleNames.APP]: "/",
   [ModuleNames.LOGIN]: "/login",
+  [ModuleNames.TEST]: "/test",
 } as const;
 
 export type Path = typeof AppLinks[keyof typeof AppLinks];
@@ -23,6 +25,12 @@ const AppRoutes: AppRoutesType[] = [
   {
     moduleName: ModuleNames.APP,
     path: AppLinks[ModuleNames.APP],
+    children: [
+      {
+        moduleName: ModuleNames.TEST,
+        path: AppLinks[ModuleNames.TEST],
+      },
+    ],
   },
   {
     moduleName: ModuleNames.LOGIN,
